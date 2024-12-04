@@ -15,14 +15,14 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.first__section}>
         <picture>
+          <source media="(max-width: 768px)" srcSet="/Mobile/Logo_mobile.png" />
           <source
             media="(max-width: 1440px)"
             srcSet="/Tablet/Logo_tablet.png"
           />
-          <source media="(max-width: 768px)" srcSet="/Mobile/Logo_mobile.png" />
           <Image
             src="/Desktop/Logo_desktop.png"
-            alt="alt text here"
+            alt="Logo"
             width={133}
             height={32}
             className={styles.logo}
@@ -33,18 +33,18 @@ export default function Header() {
             isMenuOpen ? styles.menu__open : styles.menu__closed
           }`}
         >
-            <a className={`${styles.a} ${styles.divider}`} href="#">
-              Home
-            </a>
-            <a className={`${styles.a} ${styles.divider}`} href="#">
-              Nossas lojas
-            </a>
-            <a className={`${styles.a} ${styles.divider}`} href="#">
-              Novidades
-            </a>
-            <a className={styles.a} href="#">
-              Promoções
-            </a>
+          <a className={`${styles.a} ${styles.divider}`} href="#">
+            Home
+          </a>
+          <a className={`${styles.a} ${styles.divider}`} href="#">
+            Nossas lojas
+          </a>
+          <a className={`${styles.a} ${styles.divider}`} href="#">
+            Novidades
+          </a>
+          <a className={styles.a} href="#">
+            Promoções
+          </a>
         </nav>
         <button className={styles.hamburguer} onClick={toggleMenu}>
           {isMenuOpen ? (
