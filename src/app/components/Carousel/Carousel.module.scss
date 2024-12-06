@@ -14,12 +14,12 @@
 }
 
 .banner {
-  width: 100vw;
+  width: 100%;
   height: auto;
 }
 
 .arrows {
-  width: 100vw;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
@@ -31,4 +31,27 @@
 
 .arrow {
   all: unset;
+}
+
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  position: absolute;
+  top: 92%;
+}
+
+.dot {
+  width: 102px;
+  height: 3px;
+  background-color: white;
+  opacity: 0.5;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  opacity: 1;
 }

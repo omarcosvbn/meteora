@@ -1,13 +1,17 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from 'embla-carousel-autoplay';
 import styles from "./Carousel.module.scss";
 
 export function Carousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 10000})]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 10000 }),
+  ]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [slidesCount, setSlidesCount] = useState(0);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -16,14 +20,18 @@ export function Carousel() {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
-  
-  const selectedScroll = useCallback(() => {
-    if (emblaApi) emblaApi.selectedScrollSnap();
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
-  
-  const scrollList = useCallback(() => {
-    if (emblaApi) emblaApi.scrollSnapList();
-  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setSlidesCount(emblaApi.slideNodes().length); // Set total slides count
+    emblaApi.on("select", onSelect); // Listen for slide changes
+    onSelect(); // Initialize current slide
+  }, [emblaApi, onSelect]);
 
 
 
@@ -105,6 +113,17 @@ export function Carousel() {
             height={18}
           />
         </button>
+      </div>
+      <div className={styles.pagination}>
+        {Array.from({ length: slidesCount }).map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.dot} ${
+              index === selectedIndex ? styles.active : ""
+            }`}
+            onClick={() => emblaApi?.scrollTo(index)}
+          ></button>
+        ))}
       </div>
     </section>
   );
