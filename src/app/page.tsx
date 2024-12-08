@@ -321,6 +321,91 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className={styles.moreinfo}>
+          <h1 className={styles.moreinfo__title}>
+            Conheça todas as nossas facilidades
+          </h1>
+          <div className={styles.moreinfo__infos}>
+            <div className={styles.moreinfo__info}>
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet="/Mobile/Ícones/x-diamond.png"
+                />
+                <source
+                  media="(max-width: 1440px)"
+                  srcSet="/Tablet/Ícones/x-diamond.png"
+                />
+                <Image
+                  src="/Desktop/Ícones/x-diamond.png"
+                  alt="Pix"
+                  width={72}
+                  height={73}
+                  className={styles.moreinfo__image}
+                />
+              </picture>
+              <div className={styles.moreinfo__text}>
+                <h3 className={styles.moreinfo__text__title}>PAGUE PELO PIX</h3>
+                <p className={styles.moreinfo__text__text}>
+                  Ganhe 5% OFF em pagamentos via PIX
+                </p>
+              </div>
+            </div>
+            <div className={styles.moreinfo__info}>
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet="/Mobile/Ícones/arrow-repeat.png"
+                />
+                <source
+                  media="(max-width: 1440px)"
+                  srcSet="/Tablet/Ícones/arrow-repeat.png"
+                />
+                <Image
+                  src="/Desktop/Ícones/arrow-repeat.png"
+                  alt="Troca grátis"
+                  width={72}
+                  height={73}
+                  className={styles.moreinfo__image}
+                />
+              </picture>
+              <div className={styles.moreinfo__text}>
+                <h3 className={styles.moreinfo__text__title}>TROCA GRÁTIS</h3>
+                <p className={styles.moreinfo__text__text}>
+                  Fique livre para trocar em até 30 dias.
+                </p>
+              </div>
+            </div>
+            <div className={styles.moreinfo__info}>
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet="/Mobile/Ícones/flower.png"
+                />
+                <source
+                  media="(max-width: 1440px)"
+                  srcSet="/Tablet/Ícones/flower.png"
+                />
+                <Image
+                  src="/Desktop/Ícones/flower.png"
+                  alt="Sustentabilidade"
+                  width={72}
+                  height={73}
+                  className={styles.moreinfo__image}
+                />
+              </picture>
+              <div className={styles.moreinfo__text}>
+                <h3 className={styles.moreinfo__text__title}>
+                  SUSTENTABILIDADE
+                </h3>
+                <p className={styles.moreinfo__text__text}>
+                  Moda responsável, que respeita o meio ambiente.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
