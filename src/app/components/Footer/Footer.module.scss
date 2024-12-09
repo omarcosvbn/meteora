@@ -1,0 +1,18 @@
+.footer{
+    width: 100vw;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .footer{
+        height: 74px;
+    }
+}

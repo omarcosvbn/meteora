@@ -406,6 +406,25 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className={styles.newsletter}>
+          <h5 className={styles.newsletter__text}>
+            Quer receber nossas novidades, promoções exclusivas e 10% OFF na
+            primeira compra? <strong className={styles.newsletter__text__strong}>Cadastre-se!</strong>
+          </h5>
+          <form className={styles.newsletter__form}>
+            <input
+              type="email"
+              placeholder="Digite seu email"
+              className={styles.newsletter__email}
+            />
+            <input
+              type="submit"
+              value="Enviar"
+              className={styles.newsletter__send}
+            />
+          </form>
+        </div>
       </div>
     </>
   );

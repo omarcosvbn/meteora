@@ -149,6 +149,7 @@
   font-size: 32px;
   font-weight: 500;
   color: white;
+  text-align: center;
 }
 
 .moreinfo__infos {
@@ -186,6 +187,53 @@
   font-size: 13px;
   font-weight: 400;
   color: white;
+}
+
+.newsletter{
+  width: 729px;
+  height: 190px;
+  padding: 40px;
+  margin: 65px 0;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__text{
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+
+    &__strong{
+      font-weight: 500;
+    }
+  }
+
+  &__form{
+    margin-top: 24px;
+  }
+
+  &__email{
+    all: unset;
+    width: 426px;
+    height: 38px;
+    padding: 0 15px;
+    border: 1px solid black;
+    border-right: none;
+    box-sizing:border-box;
+  }
+
+  &__send{
+    all: unset;
+    width: 84px;
+    height: 38px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    background-color: #9353FF;
+  }
 }
 
 @media (max-width: 1440px) {
@@ -227,6 +275,19 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  .newsletter{
+    width: 690px;
+    margin: 28px 0;
+  
+    &__text{
+      font-size: 16px;
+    }
+  
+    &__email{
+      width: 327px;
+    }
   }
 }
 
@@ -272,5 +333,20 @@
   .moreinfo__image {
     width: 56px;
     height: 57px;
+  }
+
+  .newsletter{
+    width: 321px;
+    height: 179px;
+    padding: 24px;
+    margin: 28px 0;
+  
+    &__text{
+      font-size: 16px;
+    }
+  
+    &__email{
+      width: 175px;
+    }
   }
 }
