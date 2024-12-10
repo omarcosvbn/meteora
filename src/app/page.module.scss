@@ -31,37 +31,6 @@
   row-gap: 24px;
 }
 
-.category {
-  width: 160px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.category__image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.category__name__box {
-  width: 100%;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-}
-
-.category__name {
-  font-size: 16px;
-  font-weight: 500;
-  color: white;
-}
-
 .products__section {
   width: 100%;
   margin-top: 48px;
@@ -80,57 +49,6 @@
   justify-content: flex-start;
   gap: 30px;
   flex-wrap: wrap;
-}
-
-.product {
-  width: 350px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.product__image {
-  width: 100%;
-  height: 422px;
-  display: block;
-}
-
-.product__info {
-  width: 100%;
-  height: auto;
-  border: 1px solid rgba(0, 0, 0, 0.13);
-  border-top: 0;
-  padding: 13px 16px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.product__name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #212529;
-}
-
-.product__description {
-  font-size: 13px;
-  font-weight: 400;
-}
-
-.product__price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #212529;
-}
-
-.more {
-  all: unset;
-  width: 102px;
-  height: 37px;
-  background-color: #9353ff;
-  text-align: center;
-  color: white;
-  cursor: pointer;
 }
 
 .moreinfo {
@@ -189,7 +107,7 @@
   color: white;
 }
 
-.newsletter{
+.newsletter {
   width: 729px;
   height: 190px;
   padding: 40px;
@@ -200,31 +118,31 @@
   align-items: center;
   justify-content: center;
 
-  &__text{
+  &__text {
     font-size: 20px;
     font-weight: 400;
     text-align: center;
 
-    &__strong{
+    &__strong {
       font-weight: 500;
     }
   }
 
-  &__form{
+  &__form {
     margin-top: 24px;
   }
 
-  &__email{
+  &__email {
     all: unset;
     width: 426px;
     height: 38px;
     padding: 0 15px;
     border: 1px solid black;
     border-right: none;
-    box-sizing:border-box;
+    box-sizing: border-box;
   }
 
-  &__send{
+  &__send {
     all: unset;
     width: 84px;
     height: 38px;
@@ -232,7 +150,7 @@
     font-weight: 500;
     color: white;
     text-align: center;
-    background-color: #9353FF;
+    background-color: #9353ff;
   }
 }
 
@@ -277,15 +195,15 @@
     align-items: center;
   }
 
-  .newsletter{
+  .newsletter {
     width: 690px;
     margin: 28px 0;
-  
-    &__text{
+
+    &__text {
       font-size: 16px;
     }
-  
-    &__email{
+
+    &__email {
       width: 327px;
     }
   }
@@ -335,17 +253,17 @@
     height: 57px;
   }
 
-  .newsletter{
+  .newsletter {
     width: 321px;
     height: 179px;
     padding: 24px;
     margin: 28px 0;
-  
-    &__text{
+
+    &__text {
       font-size: 16px;
     }
-  
-    &__email{
+
+    &__email {
       width: 175px;
     }
   }
