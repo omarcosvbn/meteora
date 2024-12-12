@@ -8,7 +8,8 @@ interface Product {
     alt: string,
     name: string,
     description: string,
-    price: string
+    price: string,
+    openModal: () => void;
   }
 
 export default function Product(props: Product) {
@@ -37,7 +38,7 @@ export default function Product(props: Product) {
           {props.description}
         </p>
         <h3 className={styles.product__price}>{props.price}</h3>
-        <button className={styles.more}>Ver mais</button>
+        <button className={styles.more} onClick={props.openModal}>Ver mais</button>
       </div>
     </div>
   );

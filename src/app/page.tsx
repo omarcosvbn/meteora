@@ -1,10 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import { Carousel } from "./components/Carousel/Carousel";
 import styles from "./page.module.scss";
 import Product from "./components/Product/Product";
 import Category from "./components/Category/Category";
+import { useState } from "react";
+import Modal from "./components/Modal/Modal";
 
 export default function Home() {
+  const [productModal, setProductModal] = useState(false);
+  const [newsletterModal, setNewsletterModal] = useState(false);
+
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent form from refreshing the page
+    setNewsletterModal(true); // Open the newsletter modal
+  };
+  
+
   return (
     <>
       <Carousel />
@@ -68,6 +81,7 @@ export default function Home() {
               name="Camiseta Conforto"
               description="Multicores e tamanhos. Tecido de algodão 100%, fresquinho para o verão. Modelagem unissex."
               price="R$ 70,00"
+              openModal={() => setProductModal(true)}
             />
             <Product
               desktopImage="/Desktop/Imagens Cards/Calça1.png"
@@ -77,6 +91,7 @@ export default function Home() {
               name="Calça Alfaiataria"
               description="Modelo Wide Leg alfaiataria em linho. Uma peça pra vida toda!"
               price="R$ 180,00"
+              openModal={() => setProductModal(true)}
             />
             <Product
               desktopImage="/Desktop/Imagens Cards/Tenis1.png"
@@ -86,6 +101,7 @@ export default function Home() {
               name="Tênis Chunky"
               description="Snicker casual com solado mais alto e modelagem robusta. Modelo unissex."
               price="R$ 250,00"
+              openModal={() => setProductModal(true)}
             />
             <Product
               desktopImage="/Desktop/Imagens Cards/Jaqueta1.png"
@@ -95,6 +111,7 @@ export default function Home() {
               name="Jaqueta Jeans"
               description="Modelo unissex oversized com gola de camurça. Atemporal e autêntica!"
               price="R$ 150,00"
+              openModal={() => setProductModal(true)}
             />
             <Product
               desktopImage="/Desktop/Imagens Cards/Óculos1.png"
@@ -104,6 +121,7 @@ export default function Home() {
               name="Óculos Redondo"
               description="Armação metálica em grafite com lentes arredondadas. Sem erro!"
               price="R$ 120,00"
+              openModal={() => setProductModal(true)}
             />
             <Product
               desktopImage="/Desktop/Imagens Cards/Bolsa1.png"
@@ -113,6 +131,7 @@ export default function Home() {
               name="Bolsa Coringa"
               description="Bolsa camel em couro sintético de alta duração. Ideal para acompanhar você por uma vida!"
               price="R$ 120,00"
+              openModal={() => setProductModal(true)}
             />
           </div>
         </div>
@@ -210,11 +229,12 @@ export default function Home() {
               Cadastre-se!
             </strong>
           </h5>
-          <form className={styles.newsletter__form}>
+          <form className={styles.newsletter__form} onSubmit={handleNewsletterSubmit}>
             <input
               type="email"
               placeholder="Digite seu email"
               className={styles.newsletter__email}
+              required
             />
             <input
               type="submit"
@@ -224,6 +244,13 @@ export default function Home() {
           </form>
         </div>
       </div>
+
+      <Modal title="E-mail cadastrado com sucesso!" openModal={newsletterModal} closeModal={() => setNewsletterModal(false)}>
+        <p>Em breve você receberá novidades exclusivas da Meteora.</p>
+      </Modal>
+      <Modal title="E-mail cadastrado com sucesso!" openModal={productModal} closeModal={() => setProductModal(false)}>
+        <p>Em breve você receberá novidades exclusivas da Meteora.</p>
+      </Modal>
     </>
   );
 }

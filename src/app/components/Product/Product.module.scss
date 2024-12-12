@@ -9,7 +9,7 @@
     height: 422px;
     display: block;
   }
-  
+
   &__info {
     width: 100%;
     height: auto;
@@ -20,18 +20,18 @@
     flex-direction: column;
     gap: 16px;
   }
-  
+
   &__name {
     font-size: 16px;
     font-weight: 700;
     color: #212529;
   }
-  
+
   &__description {
     font-size: 13px;
     font-weight: 400;
   }
-  
+
   &__price {
     font-size: 16px;
     font-weight: 700;
@@ -40,12 +40,31 @@
 }
 
 .more {
-    all: unset;
-    width: 102px;
-    height: 37px;
-    background-color: #9353ff;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-  }
+  all: unset;
+  width: 102px;
+  height: 37px;
+  background-color: #9353ff;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
 
+@media (max-width: 1440px) {
+  .product {
+    width: 330px;
+
+    &__image {
+      height: 389px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .product {
+    width: 323px;
+
+    &__image {
+      height: 402px;
+    }
+  }
+}
