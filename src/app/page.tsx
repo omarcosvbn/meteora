@@ -5,17 +5,57 @@ import { Carousel } from "./components/Carousel/Carousel";
 import styles from "./page.module.scss";
 import Product from "./components/Product/Product";
 import Category from "./components/Category/Category";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./components/Modal/Modal";
 
+type Product = {
+  id: number;
+  desktopImage: string;
+  tabletImage: string;
+  mobileImage: string;
+  alt: string;
+  name: string;
+  description: string;
+  price: string;
+};
+
+async function fetchProducts(): Promise<Product[]> {
+  const res = await fetch("http://localhost:3001/products", {
+    cache: "no-store", // Disable caching for SSR
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+  return res.json();
+}
+
+
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
   const [productModal, setProductModal] = useState(false);
   const [newsletterModal, setNewsletterModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent form from refreshing the page
-    setNewsletterModal(true); // Open the newsletter modal
+    e.preventDefault();
+    setNewsletterModal(true);
   };
+
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
 
   return (
     <>
@@ -72,66 +112,23 @@ export default function Home() {
         <div className={styles.products__section}>
           <h1 className={styles.title}>Produtos que estão bombando!</h1>
           <div className={styles.products}>
-            <Product
-              desktopImage="/Desktop/Imagens Cards/Camiseta1.png"
-              tabletImage="/Tablet/Imagens Cards/Camiseta1-1.png"
-              mobileImage="/Mobile/Imagens Cards/Camiseta1-2.png"
-              alt="Camiseta"
-              name="Camiseta Conforto"
-              description="Multicores e tamanhos. Tecido de algodão 100%, fresquinho para o verão. Modelagem unissex."
-              price="R$ 70,00"
-              openModal={() => setProductModal(true)}
-            />
-            <Product
-              desktopImage="/Desktop/Imagens Cards/Calça1.png"
-              tabletImage="/Tablet/Imagens Cards/Calça1-1.png"
-              mobileImage="/Mobile/Imagens Cards/Calça1-2.png"
-              alt="Calça"
-              name="Calça Alfaiataria"
-              description="Modelo Wide Leg alfaiataria em linho. Uma peça pra vida toda!"
-              price="R$ 180,00"
-              openModal={() => setProductModal(true)}
-            />
-            <Product
-              desktopImage="/Desktop/Imagens Cards/Tenis1.png"
-              tabletImage="/Tablet/Imagens Cards/Tenis1-1.png"
-              mobileImage="/Mobile/Imagens Cards/Tenis1-2.png"
-              alt="Tênis"
-              name="Tênis Chunky"
-              description="Snicker casual com solado mais alto e modelagem robusta. Modelo unissex."
-              price="R$ 250,00"
-              openModal={() => setProductModal(true)}
-            />
-            <Product
-              desktopImage="/Desktop/Imagens Cards/Jaqueta1.png"
-              tabletImage="/Tablet/Imagens Cards/Jaqueta1-1.png"
-              mobileImage="/Mobile/Imagens Cards/Jaqueta1-2.png"
-              alt="Jaqueta"
-              name="Jaqueta Jeans"
-              description="Modelo unissex oversized com gola de camurça. Atemporal e autêntica!"
-              price="R$ 150,00"
-              openModal={() => setProductModal(true)}
-            />
-            <Product
-              desktopImage="/Desktop/Imagens Cards/Óculos1.png"
-              tabletImage="/Tablet/Imagens Cards/Óculos1-1.png"
-              mobileImage="/Mobile/Imagens Cards/Óculos1-2.png"
-              alt="Óculos"
-              name="Óculos Redondo"
-              description="Armação metálica em grafite com lentes arredondadas. Sem erro!"
-              price="R$ 120,00"
-              openModal={() => setProductModal(true)}
-            />
-            <Product
-              desktopImage="/Desktop/Imagens Cards/Bolsa1.png"
-              tabletImage="/Tablet/Imagens Cards/Bolsa1-1.png"
-              mobileImage="/Mobile/Imagens Cards/Bolsa1-2.png"
-              alt="Bolsa"
-              name="Bolsa Coringa"
-              description="Bolsa camel em couro sintético de alta duração. Ideal para acompanhar você por uma vida!"
-              price="R$ 120,00"
-              openModal={() => setProductModal(true)}
-            />
+            {isLoading ? (
+              <p>Loading products...</p>
+            ) : (
+              products.map((product) => (
+                <Product
+                  key={product.id}
+                  desktopImage={product.desktopImage}
+                  tabletImage={product.tabletImage}
+                  mobileImage={product.mobileImage}
+                  alt={product.alt}
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                  openModal={() => setProductModal(true)}
+                />
+              ))
+            )}
           </div>
         </div>
 
