@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Carousel } from "./components/Carousel/Carousel";
 import styles from "./page.module.scss";
+import { useSearch } from "./context/SearchContext";
 import Product from "./components/Product/Product";
 import Category from "./components/Category/Category";
 import { useEffect, useState } from "react";
@@ -34,6 +35,8 @@ export default function Home() {
   const [newsletterModal, setNewsletterModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const { searchQuery } = useSearch();
 
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,6 +48,7 @@ export default function Home() {
       try {
         const data = await fetchProducts();
         setProducts(data);
+        setFilteredProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -54,6 +58,27 @@ export default function Home() {
 
     loadProducts();
   }, []);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+
+    const filtered = products.filter(
+      (product) =>
+        (category === "all" || product.category === category) &&
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    setFilteredProducts(filtered);
+  };
+
+  useEffect(() => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    setFilteredProducts(
+      products.filter((product) =>
+        product.name.toLowerCase().includes(lowerCaseQuery)
+      )
+    );
+  }, [searchQuery, products]);
 
   return (
     <>
@@ -68,7 +93,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_camisetas.png"
               alt="Camisetas"
               name="Camisetas"
-              onClick={() => setSelectedCategory("camisetas")}
+              onClick={() => handleCategoryChange("camisetas")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_bolsas.png"
@@ -76,7 +101,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_bolsas.png"
               alt="Bolsas"
               name="Bolsas"
-              onClick={() => setSelectedCategory("bolsas")}
+              onClick={() => handleCategoryChange("bolsas")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_calcados.png"
@@ -84,7 +109,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_calcados.png"
               alt="Calçados"
               name="Calçados"
-              onClick={() => setSelectedCategory("calcados")}
+              onClick={() => handleCategoryChange("calcados")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_calcas.png"
@@ -92,7 +117,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_calcas.png"
               alt="Calças"
               name="Calças"
-              onClick={() => setSelectedCategory("calcas")}
+              onClick={() => handleCategoryChange("calcas")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_casacos.png"
@@ -100,7 +125,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_casacos.png"
               alt="Casacos"
               name="Casacos"
-              onClick={() => setSelectedCategory("casacos")}
+              onClick={() => handleCategoryChange("casacos")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_oculos.png"
@@ -108,7 +133,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_oculos.png"
               alt="Óculos"
               name="Óculos"
-              onClick={() => setSelectedCategory("oculos")}
+              onClick={() => handleCategoryChange("oculos")}
             />
           </div>
         </div>
@@ -119,25 +144,19 @@ export default function Home() {
             {isLoading ? (
               <p>Loading products...</p>
             ) : (
-              products
-                .filter(
-                  (product) =>
-                    selectedCategory === "all" ||
-                    product.category === selectedCategory
-                )
-                .map((product) => (
-                  <Product
-                    key={product.id}
-                    desktopImage={product.desktopImage}
-                    tabletImage={product.tabletImage}
-                    mobileImage={product.mobileImage}
-                    alt={product.alt}
-                    name={product.name}
-                    description={product.description}
-                    price={product.price}
-                    openModal={() => setProductModal(true)}
-                  />
-                ))
+              filteredProducts.map((product) => (
+                <Product
+                  key={product.id}
+                  desktopImage={product.desktopImage}
+                  tabletImage={product.tabletImage}
+                  mobileImage={product.mobileImage}
+                  alt={product.alt}
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                  openModal={() => setProductModal(true)}
+                />
+              ))
             )}
           </div>
         </div>

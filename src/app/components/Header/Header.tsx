@@ -2,13 +2,21 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useSearch } from "../../context/SearchContext";
 import styles from "./Header.module.scss";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setSearchQuery } = useSearch();
+  const [inputValue, setInputValue] = useState("");
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchQuery(inputValue);
   };
 
   return (
@@ -55,11 +63,13 @@ export default function Header() {
         </button>
       </div>
 
-      <form className={styles.second__section}>
+      <form className={styles.second__section} onSubmit={handleSearchSubmit}>
         <input
           type="text"
           placeholder="Digite o produto"
           className={styles.search}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <input type="submit" value="Buscar" className={styles.search__apply} />
       </form>

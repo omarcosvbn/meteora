@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import { SearchProvider } from "./context/SearchContext";
 
 const inter = localFont({
   src: "./fonts/Inter-VariableFont_opsz,wght.ttf",
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <SearchProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </SearchProvider>
       </body>
     </html>
   );
