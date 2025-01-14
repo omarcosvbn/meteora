@@ -6,12 +6,13 @@ desktopImage: string,
 tabletImage: string,
 mobileImage: string,
 alt: string,
-name: string
+name: string,
+onClick: () => void
 }
 
 export default function Category(props: Category) {
   return (
-    <div className={styles.category}>
+    <div className={styles.category} onClick={props.onClick}>
       <picture>
         <source
           media="(max-width: 768px)"

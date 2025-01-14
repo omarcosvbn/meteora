@@ -17,30 +17,28 @@ type Product = {
   name: string;
   description: string;
   price: string;
+  category: string;
 };
 
 async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch("http://localhost:3001/products", {
-    cache: "no-store", // Disable caching for SSR
-  });
+  const res = await fetch("http://localhost:3001/products");
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
   return res.json();
 }
 
-
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [productModal, setProductModal] = useState(false);
   const [newsletterModal, setNewsletterModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setNewsletterModal(true);
   };
-
 
   useEffect(() => {
     async function loadProducts() {
@@ -70,6 +68,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_camisetas.png"
               alt="Camisetas"
               name="Camisetas"
+              onClick={() => setSelectedCategory("camisetas")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_bolsas.png"
@@ -77,6 +76,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_bolsas.png"
               alt="Bolsas"
               name="Bolsas"
+              onClick={() => setSelectedCategory("bolsas")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_calcados.png"
@@ -84,6 +84,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_calcados.png"
               alt="Calçados"
               name="Calçados"
+              onClick={() => setSelectedCategory("calcados")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_calcas.png"
@@ -91,6 +92,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_calcas.png"
               alt="Calças"
               name="Calças"
+              onClick={() => setSelectedCategory("calcas")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_casacos.png"
@@ -98,6 +100,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_casacos.png"
               alt="Casacos"
               name="Casacos"
+              onClick={() => setSelectedCategory("casacos")}
             />
             <Category
               desktopImage="/Desktop/Categorias/categoria_oculos.png"
@@ -105,6 +108,7 @@ export default function Home() {
               mobileImage="/Mobile/Categorias/categoria_oculos.png"
               alt="Óculos"
               name="Óculos"
+              onClick={() => setSelectedCategory("oculos")}
             />
           </div>
         </div>
@@ -115,19 +119,25 @@ export default function Home() {
             {isLoading ? (
               <p>Loading products...</p>
             ) : (
-              products.map((product) => (
-                <Product
-                  key={product.id}
-                  desktopImage={product.desktopImage}
-                  tabletImage={product.tabletImage}
-                  mobileImage={product.mobileImage}
-                  alt={product.alt}
-                  name={product.name}
-                  description={product.description}
-                  price={product.price}
-                  openModal={() => setProductModal(true)}
-                />
-              ))
+              products
+                .filter(
+                  (product) =>
+                    selectedCategory === "all" ||
+                    product.category === selectedCategory
+                )
+                .map((product) => (
+                  <Product
+                    key={product.id}
+                    desktopImage={product.desktopImage}
+                    tabletImage={product.tabletImage}
+                    mobileImage={product.mobileImage}
+                    alt={product.alt}
+                    name={product.name}
+                    description={product.description}
+                    price={product.price}
+                    openModal={() => setProductModal(true)}
+                  />
+                ))
             )}
           </div>
         </div>
