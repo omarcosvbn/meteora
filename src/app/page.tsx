@@ -31,7 +31,6 @@ async function fetchProducts(): Promise<Product[]> {
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [productModal, setProductModal] = useState(false);
   const [newsletterModal, setNewsletterModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -59,26 +58,22 @@ export default function Home() {
     loadProducts();
   }, []);
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-
-    const filtered = products.filter(
+  const filterProducts = (category: string, query: string): Product[] => {
+    const lowerCaseQuery = query.toLowerCase();
+    return products.filter(
       (product) =>
         (category === "all" || product.category === category) &&
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        product.name.toLowerCase().includes(lowerCaseQuery)
     );
-
-    setFilteredProducts(filtered);
   };
 
   useEffect(() => {
-    const lowerCaseQuery = searchQuery.toLowerCase();
-    setFilteredProducts(
-      products.filter((product) =>
-        product.name.toLowerCase().includes(lowerCaseQuery)
-      )
-    );
-  }, [searchQuery, products]);
+    setFilteredProducts(filterProducts(selectedCategory, searchQuery));
+  }, [selectedCategory, searchQuery, products]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+  };
 
   return (
     <>
