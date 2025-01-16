@@ -56,6 +56,7 @@
    ```
 3. Run the API
    ```sh
+   cd src/app
    json-server db.json --port 3001
    ```
 4. Run the project
