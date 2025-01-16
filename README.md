@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
 
+
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/omarcosvbn/meteora">
+    <img src="images/logo.png" alt="Logo" width="80" height="auto">
+  </a>
+
+<h3 align="center">Meteora</h3>
+
+  <p align="center">
+    Meteora is a fictional web store created for educational purposes. Its key features include the use of reusable components, button-based filtering, a search bar, API fetching, and responsive design.
+  </p>
+</div>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Meteora][product-screenshot]]()
+
+
+### Built With
+
+[![Next][Next.js]][Next-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/omarcosvbn/meteora.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run the API
+   ```sh
+   json-server db.json --port 3001
+   ```
+4. Run the project
+   ```sh
+   npm run start
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project can be visualized at [localhost](http://localhost:3000/).
 
-## Learn More
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-To learn more about Next.js, take a look at the following resources:
+<!-- CONTACT -->
+## Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Marcos Nascimento - omarcosvbn@gmail.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Project Link: [https://github.com/omarcosvbn/meteora](https://github.com/omarcosvbn/meteora)
 
-## Deploy on Vercel
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<!-- MARKDOWN LINKS & IMAGES -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/marcos-bnascimento/
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+
